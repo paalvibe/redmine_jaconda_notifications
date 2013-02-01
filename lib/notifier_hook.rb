@@ -1,3 +1,5 @@
+# #encoding: utf-8
+
 class NotifierHook < Redmine::Hook::Listener
 
   def controller_issues_new_after_save(context = { })
@@ -88,7 +90,10 @@ end
 private
 
   def deliver(message)
-    Jaconda::Notification.authenticate(Setting.plugin_redmine_jaconda_notifications)
+    # convert setting keys to syms which is what jaconda gem consumes
+    options = Setting.plugin_redmine_jaconda_notifications
+    new_options = Hash[options.map{|k, v| [k.to_sym, v] } ]
+    Jaconda::Notification.authenticate(new_options)
 
     Jaconda::Notification.notify(:text => message,
                                 :sender_name => "redmine")

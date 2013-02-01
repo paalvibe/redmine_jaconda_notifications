@@ -1,5 +1,7 @@
 # Jaconda Notifications Plugin for Redmine
 
+Updated by Paal de Vibe to Redmine 2.
+
 This plugin is intended to provide basic integration with [Jaconda](http://jaconda.im).
 Following actions will result in notifications to your Jaconda room:
 
